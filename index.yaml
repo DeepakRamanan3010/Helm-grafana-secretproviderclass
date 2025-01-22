@@ -19,11 +19,11 @@ entries:
       version: 0.0.0
     - condition: kubeStateMetrics.enabled
       name: kube-state-metrics
-      repository: https://DeepakRamanan3010.github.io/helm-charts
+      repository: https://deepakramanan3010.github.io/helm-charts
       version: 5.28.*
     - condition: nodeExporter.enabled
       name: prometheus-node-exporter
-      repository: https://DeepakRamanan3010.github.io/helm-charts
+      repository: https://deepakramanan3010.github.io/helm-charts
       version: 4.43.*
     - condition: grafana.enabled
       name: grafana
@@ -31,7 +31,7 @@ entries:
       version: 8.8.*
     - condition: windowsMonitoring.enabled
       name: prometheus-windows-exporter
-      repository: https://DeepakRamanan3010.github.io/helm-charts
+      repository: https://deepakramanan3010.github.io/helm-charts
       version: 0.7.*
     description: kube-prometheus-stack collects Kubernetes manifests, Grafana dashboards,
       and Prometheus rules combined with documentation and scripts to provide easy
