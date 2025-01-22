@@ -1040,7 +1040,6 @@ grafana:
   # Secret Provider Class Configuration
   secretProviderClass:
     enabled: true
-    name: "aws-secret-provider"
     
     # AWS Secrets Manager configuration
     secretsManager:
