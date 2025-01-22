@@ -1104,6 +1104,8 @@ grafana:
   serviceAccount:
     create: true
     autoMount: true
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::YOUR_ACCOUNT_ID:role/YOUR_IAM_ROLE_NAME
 
   sidecar:
     dashboards:
