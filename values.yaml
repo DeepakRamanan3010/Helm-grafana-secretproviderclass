@@ -1043,10 +1043,7 @@ grafana:
     enabled: true
   
     # Name of the SecretProviderClass resource
-    name: "aws-secrets"
-  
-    # Namespace where the SecretProviderClass will be created
-    namespace: "default"
+    name: aws-secrets
   
     # Provider type (aws or azure)
     provider: "aws"
