@@ -1039,27 +1039,18 @@ grafana:
 
   # Secret Provider Class Configuration
   secretProviderClass:
-    # Enable or disable the Secret Provider Class
     enabled: true
-  
-    # Name of the SecretProviderClass resource
-    name: aws-secrets
-  
-    # Provider type (aws or azure)
-    provider: "aws"
-  
-    # Name of the secret in AWS Secrets Manager
-    objectName: "my-secret-name"
-  
-    # JMES Path configuration for secret extraction
-    jmesPath:
-      # The path to extract from the secret
-      path: "password"
-      # Alias for the extracted secret value
-      objectAlias: "db-password"
-  
-    # Name of the Kubernetes secret to be created
-    secretName: "my-k8s-secret"
+    name: "aws-secret-provider"
+    
+    # AWS Secrets Manager configuration
+    secretsManager:
+      secretName: "Grafana_Secret_EKS"  # Your AWS Secrets Manager secret name
+      version: "AWSCURRENT"                  # Secret version, default is latest
+    
+    # Kubernetes Secret configuration
+    kubernetes:
+      secretName: "Grafana_Secret_EKS"       # Name of the K8s secret to be created
+      secretKey: "adminPassword"              # Key in the K8s secret where the value will be stored
 
   ingress:
     ## If true, Grafana Ingress will be created
