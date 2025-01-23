@@ -1222,10 +1222,6 @@ topologySpreadConstraints:
 tolerations:
   {{- toYaml . | nindent 2 }}
 {{- end }}
-    volumeMounts:
-      - name: secret-provider
-        mountPath: /mnt/secrets  # Path where the secrets will be mounted
-        readOnly: true
 volumes:
   - name: secret-provider
     csi:
