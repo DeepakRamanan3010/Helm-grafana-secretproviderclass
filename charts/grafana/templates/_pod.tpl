@@ -1223,11 +1223,11 @@ tolerations:
   {{- toYaml . | nindent 2 }}
 {{- end }}
     volumeMounts:
-      - name: secret
-        mountPath: /mnt/secret  # Path where the secrets will be mounted
+      - name: secret-provider
+        mountPath: "/mnt/secret-provider"  # Path where the secrets will be mounted
         readOnly: true
 volumes:
-  - name: secret
+  - name: secret-provider
     csi:
       driver: secrets-store.csi.k8s.io
       readOnly: true
