@@ -1227,9 +1227,12 @@ tolerations:
         mountPath: /mnt/secrets  # Path where the secrets will be mounted
         readOnly: true
 volumes:
-  - name: secret-provider
-    secretProviderClass:
-      name: {{ .Values.secretProviderClass.name }}  # Reference to your SecretProviderClass
+  - name: secrets-store-inline
+    csi:
+      driver: secrets-store.csi.k8s.io
+      readOnly: true
+      volumeAttributes:
+       secretProviderClass: "nginx-deployment-aws-secrets"
   - name: config
     configMap:
       name: {{ include "grafana.fullname" . }}
