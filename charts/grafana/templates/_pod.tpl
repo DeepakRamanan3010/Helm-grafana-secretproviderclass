@@ -1222,8 +1222,12 @@ topologySpreadConstraints:
 tolerations:
   {{- toYaml . | nindent 2 }}
 {{- end }}
+    volumeMounts:
+      - name: secret
+        mountPath: /mnt/secret  # Path where the secrets will be mounted
+        readOnly: true
 volumes:
-  - name: secret-provider
+  - name: secret
     csi:
       driver: secrets-store.csi.k8s.io
       readOnly: true
