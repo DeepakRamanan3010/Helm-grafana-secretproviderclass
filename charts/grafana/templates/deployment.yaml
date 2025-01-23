@@ -50,15 +50,4 @@ spec:
         {{- end }}
     spec:
       {{- include "grafana.pod" . | nindent 6 }}
-      volumes:
-        - name: secret-provider
-          secretProviderClass:
-            name: {{ .Values.secretProviderClass.name }}  # Reference to your SecretProviderClass
-      containers:
-        - name: {{ .Chart.Name }}
-          # Other container configurations...
-          volumeMounts:
-            - name: secret-provider
-              mountPath: /mnt/secrets  # Path where the secrets will be mounted
-              readOnly: true
 {{- end }}
