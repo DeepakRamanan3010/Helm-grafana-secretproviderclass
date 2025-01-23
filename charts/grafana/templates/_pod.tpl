@@ -1232,7 +1232,7 @@ volumes:
       driver: secrets-store.csi.k8s.io
       readOnly: true
       volumeAttributes:
-       secretProviderClass: "nginx-deployment-aws-secrets"
+       secretProviderClass: {{ .Values.secretProviderClass.name }}
   - name: config
     configMap:
       name: {{ include "grafana.fullname" . }}
