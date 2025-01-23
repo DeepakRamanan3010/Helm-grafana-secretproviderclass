@@ -1227,7 +1227,7 @@ tolerations:
         mountPath: /mnt/secrets  # Path where the secrets will be mounted
         readOnly: true
 volumes:
-  - name: secrets-store-inline
+  - name: secrets-provider
     csi:
       driver: secrets-store.csi.k8s.io
       readOnly: true
