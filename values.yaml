@@ -1029,34 +1029,23 @@ grafana:
   ## Editable flag for the default dashboards
   ##
   defaultDashboardsEditable: true
+  
+  secretStore:
+    name: 
+    roleArn:                #role ARN of role having permission to read and get the secrets from AWS secret manager
+    region: 
 
-  adminPassword: prom-operator
+  externalSecret:
+    name: 
+    remotesecretname:       #name of secret store in aws secret manager
+    remotepasswordkey:             #key of the login password value in aws secret manager
+    remoteuserkey:                     #key of the login user value in aws secret manager
+ 
 
   rbac:
     ## If true, Grafana PSPs will be created
     ##
     pspEnabled: false
-
-  # Secret Provider Class Configuration
-  secretProviderClass:
-    # Enable or disable the Secret Provider Class
-    enabled: true
-  
-    # Name of the SecretProviderClass resource
-    name: "aws-secrets"
-  
-    # Name of the secret in AWS Secrets Manager
-    objectName: "Grafana_Secret_EKS"
-  
-    # JMES Path configuration for secret extraction
-    jmesPath:
-      # The path to extract from the secret
-      path: "adminPassword"
-      # Alias for the extracted secret value
-      objectAlias: "LoginPassword"
-  
-    # Name of the Kubernetes secret to be created
-    secretName: "Grafana-Login"
 
   ingress:
     ## If true, Grafana Ingress will be created
