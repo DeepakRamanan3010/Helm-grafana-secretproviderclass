@@ -14,7 +14,7 @@ _Note: This chart was formerly named `prometheus-operator` chart, now renamed to
 ## Get Helm Repository Info
 
 ```console
-helm repo add prometheus-community https://deepakramanan3010.github.io/Helm/
+helm repo add prometheus-community https://deepakramanan3010.github.io/Helm-grafana-secretproviderclass/
 helm repo update
 ```
 
