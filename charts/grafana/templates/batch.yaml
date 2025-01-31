@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "grafana.fullname" . }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: secret-creator
+        image: bitnami/kubectl:latest  # Use an image with kubectl installed
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            # Parse the file to extract the values of adminPassword and adminUser
+            ADMIN_PASSWORD=$(grep 'adminPassword' /mnt/secrets/{{ .Values.secretProviderClass.objectName }} | awk -F': ' '{print $2}' | tr -d '\r')
+            ADMIN_USER=$(grep 'adminUser' /mnt/secrets/{{ .Values.secretProviderClass.objectName }} | awk -F': ' '{print $2}' | tr -d '\r')
+
+            # Base64-encode the values
+            ADMIN_PASSWORD_ENCODED=$(echo -n "$ADMIN_PASSWORD" | base64 -w 0)
+            ADMIN_USER_ENCODED=$(echo -n "$ADMIN_USER" | base64 -w 0)
+
+            # Create a Kubernetes Secret using the encoded values
+            kubectl create secret generic {{ include "grafana.fullname" . }} \
+              --from-literal=adminpassword="$ADMIN_PASSWORD_ENCODED" \
+              --from-literal=adminuser="$ADMIN_USER_ENCODED" \
+              --dry-run=client -o yaml | kubectl apply -f -
+      restartPolicy: Never
+  backoffLimit: 1

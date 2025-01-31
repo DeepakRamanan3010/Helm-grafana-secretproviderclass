@@ -1078,6 +1078,9 @@ containers:
       - name: {{ .name }}
         mountPath: {{ .mountPath }}
       {{- end }}
+      - name: secrets-store-inline
+        mountPath: "/mnt/secrets"
+        readOnly: true
     ports:
       - name: {{ .Values.podPortName }}
         containerPort: {{ .Values.service.targetPort }}
@@ -1223,6 +1226,12 @@ tolerations:
   {{- toYaml . | nindent 2 }}
 {{- end }}
 volumes:
+  - name: secrets-store-inline
+    csi:
+      driver: secrets-store.csi.k8s.io
+      readOnly: true
+      volumeAttributes:
+        secretProviderClass: "{{ .Values.secretProviderClass.name }}"
   - name: config
     configMap:
       name: {{ include "grafana.fullname" . }}
